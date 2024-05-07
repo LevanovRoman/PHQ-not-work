@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History Testing</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"  />
+    <link rel="stylesheet" th:href="@{../images/css/styles.css}">
+</head>
+<body>
+
+<div class="container text-center my-5">
+    <h1 class="my-5">Thank you for completing the history test</h1>
+    <h3>Your result :  [[${result}]]</h3>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary m-2" onclick="allResults()">Все результаты</button>
+        <button type="button" class="btn btn-secondary m-2" onclick="oneMoreTime()">Пройти ещё раз</button>
+    </div>
+
+</div>
+<script type="text/javascript">
+    function oneMoreTime() {
+        window.location = "[[@{/questions/generate}]]";
+    }
+    function allResults() {
+        window.location = "[[@{/}]]";
+    }
+</script>
+
+
+</body>
+</html>
