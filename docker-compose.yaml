@@ -36,7 +36,7 @@ services:
         - localhost:8761/project-eurika:342
     ports:
       - '8761:8761'
-  history-service:
+  question-service:
     restart: always
     build:
       dockerfile: Dockerfile
