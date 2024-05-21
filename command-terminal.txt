@@ -1,0 +1,41 @@
+mvn clean package
+java -jar <jar-file-name>.jar
+
+docker build --build-arg JAR_FILE=service-registry-microservice/target/service-registry-microservice-0.0.1-SNAPSHOT.jar -t project-eurika:342 .
+
+project-eurika:342
+
+docker run -d -p 8761:8761 --name project-eurika project-eurika:342
+-----------------------------------------------------------------------------
+docker build --build-arg JAR_FILE=api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar -t project-api-gateway:342 .
+
+project-api-gateway
+
+docker run -d -p 8765:8765 --name project-api-gateway project-api-gateway:342
+-----------------------------------------------------------------------------
+docker build --build-arg JAR_FILE=history-testing-microservice/target/history-test-microservice-0.0.1-SNAPSHOT.jar -t project-history:342 .
+
+project-history:342
+
+docker run -d -p 8080:8080 --name project-history project-history:342
+-----------------------------------------------------------------------------
+docker run -d --name questionmicro_db -p 5450:5432 -e POSTGRES_DB=questionmicro_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin postgres:16
+-----------------------------------------------------------------------------
+docker run -d --name quiz_db -p 5451:5432 -e POSTGRES_DB=quiz_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin postgres:16
+
+docker build --build-arg JAR_FILE=quize-service-microservice/target/quiz-service-microservice-0.0.1-SNAPSHOT.jar -t project-quiz:342 .
+
+project-quiz:342
+
+docker run -d -p 8090:8090 --name project-quiz project-quiz:342
+-----------------------------------------------------------------------------
+docker run -d --name securitymicro_db -p 5555:5432 -e POSTGRES_DB=securitymicro_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin postgres:16
+
+docker build --build-arg JAR_FILE=front-history-testing/target/front-history-testing-0.0.1-SNAPSHOT.jar -t project-front:342 .
+
+project-front:342
+
+docker run -d -p 8888:8888 --name project-front project-front:342
+------------------------------------------------------------------------------
+docker compose up -d
+docker compose down

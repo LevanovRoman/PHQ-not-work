@@ -1,0 +1,11 @@
+com\myapp\historytestmicroservice\service\CategoryService.class
+com\myapp\historytestmicroservice\model\Question.class
+com\myapp\historytestmicroservice\model\QuestionWrapper.class
+com\myapp\historytestmicroservice\service\QuestionService.class
+com\myapp\historytestmicroservice\repository\CategoryRepository.class
+com\myapp\historytestmicroservice\controller\QuestionController.class
+com\myapp\historytestmicroservice\repository\QuestionRepository.class
+com\myapp\historytestmicroservice\HistoryTestMicroserviceApplication.class
+com\myapp\historytestmicroservice\QuestionNotFoundException.class
+com\myapp\historytestmicroservice\model\Response.class
+com\myapp\historytestmicroservice\model\Category.class

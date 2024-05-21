@@ -1,0 +1,78 @@
+name: history-quiz
+services:
+  # Инфраструктур
+  front-db:
+    image: postgres:16
+    ports:
+      - '5555:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: securitymicro_db
+  history-db:
+    image: postgres:16
+    ports:
+      - '5450:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: questionmicro_db
+  quiz-db:
+    image: postgres:16
+    ports:
+      - '5451:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: quiz_db
+  # Сервисы
+  eureka-server:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: service-registry-microservice/target/service-registry-microservice-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:8761/project-eurika:342
+    ports:
+      - '8761:8761'
+  history-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: history-testing-microservice/target/history-test-microservice-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:8080/project-history:342
+    ports:
+      - '8080:8080'
+  quiz-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: quize-service-microservice/target/quiz-service-microservice-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:8090/project-quiz:342
+    ports:
+        - '8090:8090'
+  api-gateway:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:8765/project-api-gateway
+    ports:
+        - '8765:8765'
+  front-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: front-history-testing/target/front-history-testing-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:8888/project-front:342
+    ports:
+        - '8888:8888'
